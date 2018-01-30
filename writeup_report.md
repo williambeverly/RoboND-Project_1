@@ -53,17 +53,36 @@ A video of the output is stored in the 'output' folder. The gif is shown below:
 
 ### Autonomous Navigation and Mapping
 
-#### 1. Fill in the `perception_step()` (at the bottom of the `perception.py` script) and `decision_step()` (in `decision.py`) functions in the autonomous mapping scripts and an explanation is provided in the writeup of how and why these functions were modified as they were.
+#### 1. Fill in the `perception_step()` (at the bottom of the `perception.py` script) and `decision_step()` (in `decision.py`) functions in the autonomous mapping scripts and provide an explanation in the writeup of how and why these functions were modified as they were.
 
+Modifications to drive_rover.py in RoverState classs (line 80 to 97):
+* to bias unexplored territory, included an 'explored' map - initially all ones. As Rover explores, values are set to zero, and any value that is present in the worldmap and is navigable and unexplored (explored==1), effectively doubles these points, so that the average steering angle vector is biased towards unexplored territory.
+* added pitch and roll tolerance values
+* added some intelligence to store transformed values, override normal navigation and hold average velocity and average steering angle over 15 seconds, with an update rate of 1Hz.
 
-#### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
+Modifications to perception.py:
+* included a world_to_pix function (line 99), required to transform the newly defined explored map to rover pixels.
+* included a mask as an additional return value in perspect_transform function (line 124)
+* included rock_thresh function that identifies rocks based on their yellow colour
+
+Explanation of perception.py:
+* Warp front camera image to top-down view (line 152)
+* Apply colour threshold to return binary matrix with navigable area (line 154)
+* Invert the navigable terrain and apply a mask of visible area (line 156) to identify obstacles
+* Identify rocks from the warped image (line 157)
+* Update vision_image for rover based on the obstacles, rocks and navigable terrain (lines 162-164)
+* Convert to Rover-centric co-ordinates (lines 166-168)
+* Convert Rover-centric to World co-ordinates for obstacles, rocks and navigable terrain (lines 175-177)
+* Apply pitch and roll tolerance limits, and only update the worldmap if the values are within the acceptable tolerances (lines 184-187)
+* Calculate bias x and y points to be added to the existing x and y pixels (line 192)
+* Concatenate the x and y vectors and calculate the polar co-ordinates (dist, angles) of each x/y pair (lines 193-195)
+* Update rover navigation (lines 200-202)
+
+#### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.
 
 **Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
 
-
-
-![alt text][image3]
 
 
