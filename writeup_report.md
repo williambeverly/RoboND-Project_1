@@ -60,7 +60,7 @@ A video of the output is stored in the 'output' folder. The gif is shown below:
 Modifications to drive_rover.py in RoverState classs (line 80 to 97):
 * to bias unexplored territory, included an 'explored' map - initially all ones. As Rover explores, values are set to zero, and any value that is present in the worldmap and is navigable and unexplored (explored==1), effectively doubles these points, so that the average steering angle vector is biased towards unexplored territory.
 * added pitch and roll tolerance values
-* added some intelligence to store transformed values, override normal navigation and hold average velocity and average steering angle over 15 seconds, with an update rate of 1Hz.
+* added some intelligence to store transformed values, override normal navigation and hold average velocity and average steering angle over 15 seconds, with an update rate of 1Hz
 
 Modifications to perception.py:
 * included a world_to_pix function (line 99), required to transform the newly defined explored map to rover pixels.
@@ -103,12 +103,12 @@ My rover does navigate autonomously, and can quite repeatably obtain above 40% m
 Most of the approach has been discussed above, so here, I will simply talk about some issues faced, and some potential improvements I would make.
 
 Issues:
-* rover can still become stuck on a rock, or navigate itself into a corner.
-* the technique utilised to bias unexplored terrain does not prevent the rover from revisiting previously visited points - in fact the technique only works if there is indeed some unexplored terrain infront of it.
+* rover can still become stuck on a rock, or navigate itself into a corner
+* the technique utilised to bias unexplored terrain does not prevent the rover from revisiting previously visited points - in fact the technique only works if there is indeed some unexplored terrain infront of it
 * rover does not have intelligence to collect samples, although the positions of the samples are being stored correctly
 
 Improvements:
-* at the start, do a full 360 rotation to determine the highest amount of navigable terrain that can be seen, and create a hierachal list of positions and orientations to return to.
+* at the start, do a full 360 rotation to determine the highest amount of navigable terrain that can be seen, and create a hierachal list of positions and orientations to return to
 * I am of the opinion the general image based searching is fine for navigating larger areas, but I would like to implement an A* algorithm for better navigating around obstacles and smaller spaces. This may also have the benefit of being able to set a goal position when becoming stuck, or being able to retrace a path back to a certain point, or indeed the initial position (when all samples have been collected)
 * add logic that prevents revisiting an area, unless it is on return path to origin (and then potentially while on return, it sees unexplored areas, and switches to (to what I am now thinking I would call 'discovery' mode!)
 * implement another mode called 'collection' that locks onto the position of the collectable rocks, to control the speed, position and orientation to collect the samples
