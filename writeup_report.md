@@ -66,17 +66,22 @@ Modifications to perception.py:
 * included rock_thresh function that identifies rocks based on their yellow colour
 
 Explanation of perception.py:
-* Warp front camera image to top-down view (line 152)
-* Apply colour threshold to return binary matrix with navigable area (line 154)
-* Invert the navigable terrain and apply a mask of visible area (line 156) to identify obstacles
-* Identify rocks from the warped image (line 157)
-* Update vision_image for rover based on the obstacles, rocks and navigable terrain (lines 162-164)
-* Convert to Rover-centric co-ordinates (lines 166-168)
-* Convert Rover-centric to World co-ordinates for obstacles, rocks and navigable terrain (lines 175-177)
-* Apply pitch and roll tolerance limits, and only update the worldmap if the values are within the acceptable tolerances (lines 184-187)
-* Calculate bias x and y points to be added to the existing x and y pixels (line 192)
-* Concatenate the x and y vectors and calculate the polar co-ordinates (dist, angles) of each x/y pair (lines 193-195)
-* Update rover navigation (lines 200-202)
+* warp front camera image to top-down view (line 152)
+* apply colour threshold to return binary matrix with navigable area (line 154)
+* invert the navigable terrain and apply a mask of visible area (line 156) to identify obstacles
+* identify rocks from the warped image (line 157)
+* update vision_image for rover based on the obstacles, rocks and navigable terrain (lines 162-164)
+* convert to Rover-centric co-ordinates (lines 166-168)
+* convert Rover-centric to World co-ordinates for obstacles, rocks and navigable terrain (lines 175-177)
+* apply pitch and roll tolerance limits, and only update the worldmap if the values are within the acceptable tolerances (lines 184-187)
+* calculate bias x and y points to be added to the existing x and y pixels (line 192)
+* concatenate the x and y vectors and calculate the polar co-ordinates (dist, angles) of each x/y pair (lines 193-195)
+* update rover navigation (lines 200-202)
+
+Modifications to decision.py:
+* defined two new modes of 'rover_stuck' and 'circular_motion' and added some logic to test whether rover is stuck, or travelling in circular motion (lines 10-22)
+* implemented recursive logic that if rover is stuck (detected after 15 seconds each time), then turn by 30 degrees to the right, and try to go forward again (lines 26-41)
+
 
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.
 
