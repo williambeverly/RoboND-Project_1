@@ -92,7 +92,7 @@ Explanation of decision.py:
 
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.
 
-The Simulator settings utilised for my run are shown below. My frames per second varied from about 18 - 36 FPS.
+The Simulator settings utilised for my run are shown below. My FPS vary between 18 - 36.
 
 ![alt text][image5]
 
