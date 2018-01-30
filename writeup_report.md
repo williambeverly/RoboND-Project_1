@@ -25,6 +25,7 @@
 [image3]: ./writeup_images/rock_transform.png
 [image4]: ./writeup_images/gif.gif
 [image5]: ./writeup_images/settings.png
+[image6]: ./writeup_images/rover.png
 
 ---
 ### Writeup / README
@@ -95,7 +96,11 @@ The Simulator settings utilised for my run are shown below. My frames per second
 
 ![alt text][image5]
 
-My rover does navigate autonomously, and can quite repeatably obtain above 40% mapped, with 60% fidelity. Most of the approach has been discussed above, so here, I will simply talk about some issues faced, and some potential improvements I would make.
+My rover does navigate autonomously, and can quite repeatably obtain above 40% mapped, with 60% fidelity, as shown below.
+
+![alt text][image6]
+
+Most of the approach has been discussed above, so here, I will simply talk about some issues faced, and some potential improvements I would make.
 
 Issues:
 * rover can still become stuck on a rock, or navigate itself into a corner.
