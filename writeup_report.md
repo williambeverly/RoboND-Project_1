@@ -81,13 +81,28 @@ Explanation of perception.py:
 Modifications to decision.py:
 * defined two new modes of 'rover_stuck' and 'circular_motion' and added some logic to test whether rover is stuck, or travelling in circular motion (lines 10-22)
 * implemented recursive logic that if rover is stuck (detected after 15 seconds each time), then turn by 30 degrees to the right, and try to go forward again (lines 26-41)
+* implemented logic to detect circular motion - when detected, rover is stopped and turned towards the original starting position, and then instructed to override normal behaviour, and advance towards the origin for 5 seconds (lines 42-76)
 
+Explanation of decision.py:
+* simplistic state machine, with 4 modes: rover_stuck, circular_motion, forwards and stop, and should only be in one of those modes at any given time, provided there are navigation angles (set in perception.py)
+* the forward and stop are the dominant modes, and orientate the rover by taking the average of all the navigable points, and setting the steering angle to the limited average
+* throttle_set has been left at 0.2
 
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.
 
-**Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
+The Simulator settings utilised for my run are shown below. My frames per second varied from about 18 - 36 FPS.
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+![alt text][image5]
 
+My rover does navigate autonomously, and can quite repeatably obtain above 40% mapped, with 60% fidelity. Most of the approach has been discussed above, so here, I will simply talk about some issues faced, and some potential improvements I would make.
 
+Issues:
+* rover can still become stuck on a rock, or navigate itself into a corner.
+* the technique utilised to bias unexplored terrain does not prevent the rover from revisiting previously visited points - in fact the technique only works if there is indeed some unexplored terrain infront of it.
+* rover does not have intelligence to collect samples, although the positions of the samples are being stored correctly
 
+Improvements:
+* at the start, do a full 360 rotation to determine the highest amount of navigable terrain that can be seen, and create a hierachal list of positions and orientations to return to.
+* I am of the opinion the general image based searching is fine for navigating larger areas, but I would like to implement an A* algorithm for better navigating around obstacles and smaller spaces. This may also have the benefit of being able to set a goal position when becoming stuck, or being able to retrace a path back to a certain point, or indeed the initial position (when all samples have been collected)
+* add logic that prevents revisiting an area, unless it is on return path to origin (and then potentially while on return, it sees unexplored areas, and switches to (to what I am now thinking I would call 'discovery' mode!)
+* implement another mode called 'collection' that locks onto the position of the collectable rocks, to control the speed, position and orientation to collect the samples
