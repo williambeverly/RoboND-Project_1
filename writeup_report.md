@@ -24,6 +24,7 @@
 [image2]: ./writeup_images/thresholded.png
 [image3]: ./writeup_images/rock_transform.png
 [image4]: ./writeup_images/gif.gif
+[image5]: ./writeup_images/settings.png
 
 ---
 ### Writeup / README
@@ -106,3 +107,8 @@ Improvements:
 * I am of the opinion the general image based searching is fine for navigating larger areas, but I would like to implement an A* algorithm for better navigating around obstacles and smaller spaces. This may also have the benefit of being able to set a goal position when becoming stuck, or being able to retrace a path back to a certain point, or indeed the initial position (when all samples have been collected)
 * add logic that prevents revisiting an area, unless it is on return path to origin (and then potentially while on return, it sees unexplored areas, and switches to (to what I am now thinking I would call 'discovery' mode!)
 * implement another mode called 'collection' that locks onto the position of the collectable rocks, to control the speed, position and orientation to collect the samples
+
+#### 3. Additional notes
+* performed on Ubuntu 16.04.3 LTS
+* navigate to folder, open terminal, execute:
+'python drive_rover.py'
