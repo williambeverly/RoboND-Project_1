@@ -112,3 +112,4 @@ Improvements:
 * performed on Ubuntu 16.04.3 LTS
 * navigate to folder, open terminal, execute:
 `python drive_rover.py`
+* run simulator in autonomous mode
