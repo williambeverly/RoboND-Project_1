@@ -20,22 +20,30 @@
 
 [//]: # (Image References)
 
-[image1]: ./misc/rover_image.jpg
-[image2]: ./calibration_images/example_grid1.jpg
-[image3]: ./calibration_images/example_rock1.jpg 
+[image1]: ./writeup_images/rover_image.jpg
+[image2]: ./writeup_images/example_grid1.jpg
+[image3]: ./writeup_images/example_rock1.jpg 
 
 ---
 ### Writeup / README
 
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  
+#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.
 
 You're reading it!
 
 ### Notebook Analysis
 #### 1. Run the functions provided in the notebook on test images (first with the test data provided, next on data you have recorded). Add/modify functions to allow for color selection of obstacles and rock samples.
-Here is an example of how to include an image in your writeup.
+The camera image was transformed to a top-down image, and a mask was created, in order to represent the boundaries of the transformed image, resulting in:
 
 ![alt text][image1]
+
+To identify the road (light surface, an RGB colour threshold of (160,160,160) was utilised, resulting in:
+
+![alt text][image2]
+
+Anything below the threshold is considered an obstacle - with exception of the rocks. Collectable rocks were identified by transforming the RGB to HSV colour space, and applying a lower and upper threshold of (20,100,100) and (40,255,255) respectively. The image was then transformed to a top-down view, resulting in:
+
+![alt text][image3]
 
 #### 1. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result. 
 And another! 
