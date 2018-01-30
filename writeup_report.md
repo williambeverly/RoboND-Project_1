@@ -23,6 +23,7 @@
 [image1]: ./writeup_images/transformed.png
 [image2]: ./writeup_images/thresholded.png
 [image3]: ./writeup_images/rock_transform.png
+[image4]: ./writeup_images/gif.gif
 
 ---
 ### Writeup / README
@@ -46,9 +47,10 @@ Anything below the threshold is considered an obstacle - with exception of the r
 ![alt text][image3]
 
 #### 1. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result. 
-And another! 
+A video of the output is stored in the 'output' folder. The gif is shown below:
 
-<video src="video.mp4" width="320" height="200" controls preload></video>
+![alt text][image4]
+
 ### Autonomous Navigation and Mapping
 
 #### 1. Fill in the `perception_step()` (at the bottom of the `perception.py` script) and `decision_step()` (in `decision.py`) functions in the autonomous mapping scripts and an explanation is provided in the writeup of how and why these functions were modified as they were.
