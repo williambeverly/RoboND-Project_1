@@ -20,9 +20,9 @@
 
 [//]: # (Image References)
 
-[image1]: ./writeup_images/rover_image.jpg
-[image2]: ./writeup_images/example_grid1.jpg
-[image3]: ./writeup_images/example_rock1.jpg 
+[image1]: ./writeup_images/transformed.png
+[image2]: ./writeup_images/thresholded.png
+[image3]: ./writeup_images/rock_transform.png
 
 ---
 ### Writeup / README
