@@ -111,4 +111,4 @@ Improvements:
 #### 3. Additional notes
 * performed on Ubuntu 16.04.3 LTS
 * navigate to folder, open terminal, execute:
-'python drive_rover.py'
+`python drive_rover.py`
